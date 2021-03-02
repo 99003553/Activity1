@@ -1,6 +1,6 @@
-#include "mystring.c"
-#include "myutils.c"
-#include "bitmask.c"
+#include "mystring.h"
+#include "myutils.h"
+#include "bitmask.h"
 #include <stdio.h>
 //Main Function
 int main()
