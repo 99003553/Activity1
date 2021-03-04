@@ -1,5 +1,5 @@
-src = Build_Multiple_File.c
-project = Build_Multiple_File
+src = Assign1.c
+project = Assign1
 $(project): $(src)
 	gcc $^ -o $@
 run: $(project)
