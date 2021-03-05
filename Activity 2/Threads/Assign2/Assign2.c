@@ -17,7 +17,7 @@ void maximini(void* arg)
         if (a[i] > maxi) 
             maxi = a[i]; 
         if (a[i] < maxi)
-            mini = a[i]    
+            mini = a[i];    
     } 
     max_num[num] = maxi; 
     min_num[num] = mini;
@@ -29,11 +29,10 @@ int main()
     int j; 
     pthread_t threads[Tmax];  
     for (j = 0; j < Tmax; j++) 
-        pthread_create(&threads[j], NULL, 
-                       maximini, (void*)NULL); 
+        pthread_create(&threads[j], NULL, maximini, (void*)NULL); 
     for (j = 0; j < Tmax; j++) 
         pthread_join(threads[j], NULL);  
-    for (j = 0; j < Th_max; j++) 
+    for (j = 0; j < Tmax; j++) 
     { 
         if (max_num[j] > maxin) 
             maxin = max_num[j];
