@@ -53,7 +53,7 @@ void *cons(void *co)
 int main()
 {   
     pthread_t producer[10],consumer[10];
-    sem_init(&empty,0,BufferSize);
+    sem_init(&emty,0,BufferSize);
     sem_init(&full,0,0);
     int a[10] = {1,2,3,4,5,6,7,8,9,10};
     for(int k = 0; k < 10; k++) 
