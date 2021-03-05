@@ -13,32 +13,32 @@ int itm=0;
 int buffer[BufferSize];
 void *prod(void *po)
 {   
-    if(write==BufferSize-1)
-    {
+    //if(write==BufferSize-1)
+    //{
         printf("Stack of producer is full,  using circular buffer operations \n");
         for(int j = 0; j < MaxItms; j++) 
         {
           itm = rand();
-          sem_wait(&empty);
-          buffer[write] = item;
+          sem_wait(&emty);
+          buffer[write] = itm;
           printf(" Insert Item %d in Producer %d at %d: ", buffer[write], *((int *)po), write);
           write = (write + 1) % BufferSize;     
           sem_post(&full);
         }
     }
-    else
+   /* else
     {
      for(int j = 0; j < MaxItms; j++) 
      {
         itm = rand();
-        sem_wait(&empty);
-        buffer[write] = item;
+        sem_wait(&emty);
+        buffer[write] = itm;
         printf(" Insert Item %d in Producer %d at %d: ", buffer[write], *((int *)po), write);
         write = (write + 1) % BufferSize;     
         sem_post(&full);
      }
-    }
-}
+    } */
+//}
 void *cons(void *co)
 {   
     if(read==BufferSize-1)
@@ -48,20 +48,20 @@ void *cons(void *co)
     else
     {
      int itm=0;
-     for(int j = 0; j < MaxItems; j++) 
+     for(int j = 0; j < MaxItms; j++) 
      {
         sem_wait(&full);
         itm = buffer[read];
         printf("Remove Item %d from Consumer %d from %d: ", itm, *((int *)co), read); 
         read = (read + 1) % BufferSize;     
-        sem_post(&empty);
+        sem_post(&emty);
      }
     }
 }
 int main()
 {   
     pthread_t producer[10],consumer[10];
-    sem_init(&empty,0,BufferSize);
+    sem_init(&emty,0,BufferSize);
     sem_init(&full,0,0);
     int a[10] = {1,2,3,4,5,6,7,8,9,10};
     for(int k = 0; k < 10; k++) 
@@ -80,7 +80,7 @@ int main()
     {
         pthread_join(consumer[k], NULL);
     }
-    sem_destroy(&empty);
+    sem_destroy(&emty);
     sem_destroy(&full);
     return 0;
 }
