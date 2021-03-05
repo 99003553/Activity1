@@ -22,8 +22,8 @@ void *prod(void *po)
      for(int j = 0; j < MaxItms; j++) 
      {
         itm = rand();
-        sem_wait(&empty);
-        buffer[write] = item;
+        sem_wait(&emty);
+        buffer[write] = itm;
         printf(" Insert Item %d in Producer %d at %d: ", buffer[write], *((int *)po), write);
         write = (write + 1) % BufferSize;     
         sem_post(&full);
@@ -39,13 +39,13 @@ void *cons(void *co)
     else
     {
      int itm=0;
-     for(int j = 0; j < MaxItems; j++) 
+     for(int j = 0; j < MaxItms; j++) 
      {
         sem_wait(&full);
         itm = buffer[read];
         printf("Remove Item %d from Consumer %d from %d: ", itm, *((int *)co), read); 
         read = (read + 1) % BufferSize;     
-        sem_post(&empty);
+        sem_post(&emty);
      }
     }
 }
@@ -72,7 +72,7 @@ int main()
     {
         pthread_join(consumer[k], NULL);
     }
-    sem_destroy(&empty);
+    sem_destroy(&emty);
     sem_destroy(&full);
     return 0;
 }
