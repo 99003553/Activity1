@@ -29,7 +29,7 @@ int main()
   
     // Read contents from file 
     d = fgetc(fptr); 
-    while (c != EOF) 
+    while (d != EOF) 
     { 
         fputc(d, fptr1); 
         d = fgetc(fptr); 
