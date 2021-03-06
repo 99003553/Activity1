@@ -1,15 +1,15 @@
-all: Activity4.c Activity4_1.c
+all: Activity7.c Activity7_1.c
 	
-Assign4: Assign4.c 
-	gcc Assign4.c -o a.out -lrt
+Assign7: Assign7.c 
+	gcc Assign7.c -o a.out -lrt
 
-Assign4_1: Assign4_1.c
-	gcc Assign4_1.c -o b.out -lrt
+Assign7_1: Assign7_1.c
+	gcc Assign7_1.c -o b.out -lrt
 	
-runAssign4:
+runAssign7:
 	./a.out
 
-runAssign4_1
+runAssign7_1
 	./b.out
 
   
