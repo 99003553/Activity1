@@ -11,3 +11,5 @@ runAssign5:
 
 runAssign5_1
 	./b.out
+clean:
+	rm -rf *.out *.o	
