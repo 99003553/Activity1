@@ -16,11 +16,17 @@ void *prod(void *po)
     {
         itm = rand();
         pthread_mutex_lock(&mutex);
-         while (((write + 1) % BufferSize) == read)
+        if(write==BufferSize-1)
         {
            buffer[write] = itm;
            printf("Insert Item %d at Producer %d in %d: ", buffer[write], *((int *)po),write);
            write = (write + 1) % BufferSize;
+        }
+        else
+        {
+           buffer[(write+1)%BufferSize] = itm;
+           printf("Insert Item %d at Producer %d in %d: ", buffer[write], *((int *)po),write);
+           write = (write + 1) % BufferSize; 
         }
         pthread_mutex_unlock(&mutex);
     }
@@ -31,12 +37,12 @@ void *cons(void *co)
     for(int l = 0; l < MaxItems; l++) 
     {
         pthread_mutex_lock(&mutex);
-        while (read == write)
-        {
-           itm = buffer[read];
-           printf("Remove Item %d at Consumer %d from %d: ", itm, *((int *)co), read);
-           read = (read + 1) % BufferSize;
-        }
+        //while (read == write)
+        //{
+        itm = buffer[read];
+        printf("Remove Item %d at Consumer %d from %d: ", itm, *((int *)co), read);
+        read = (read + 1) % BufferSize;
+        //}
         pthread_mutex_unlock(&mutex);
     }
 }
