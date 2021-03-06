@@ -12,4 +12,5 @@ runAssign7:
 runAssign7_1
 	./b.out
 
-  
+clean:
+	rm -rf *.out *.o  
